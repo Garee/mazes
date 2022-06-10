@@ -1,6 +1,11 @@
 import { Logo } from './logo'
+import { Grid } from './mazes/grid';
 
 export function App() {
+  const grid = new Grid(4, 4);
+  grid.binaryTree();
+  console.log(grid.toString());
+
   return (
     <>
       <Logo />
