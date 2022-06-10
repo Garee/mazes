@@ -52,13 +52,13 @@ export class Grid {
         return this.#rows * this.#cols;
     }
 
-    public * eachRow() {
+    public *eachRow() {
         for (let r = 0; r < this.#rows; r++) {
             yield this.#grid[r];
         }
     }
 
-    public * eachCell() {
+    public *eachCell() {
         for (let r = 0; r < this.#rows; r++) {
             for (let c = 0; c < this.#cols; c++) {
                 yield this.#grid[r][c];
@@ -67,7 +67,7 @@ export class Grid {
     }
 
     public toString() {
-        let s = "+" + ("---+".repeat(this.#cols)) + "\n";
+        let s = "+" + "---+".repeat(this.#cols) + "\n";
         for (let row of this.eachRow()) {
             let top = "|";
             let bottom = "+";
@@ -85,14 +85,37 @@ export class Grid {
         return s;
     }
 
-    public binaryTree() {
+    public binaryTree(): void {
         for (let cell of this.eachCell()) {
-            const neighbours = [cell.north, cell.east].filter(n => !!n);
+            const neighbours = [cell.north, cell.east].filter((n) => !!n);
             const neighbour = sample(neighbours);
             if (neighbour) {
                 cell.link(neighbour);
             }
         }
+    }
+
+    public sideWinder(): void {
+        for (const row of this.eachRow()) {
+            row.forEach((cell) => {
+                let run = [cell];
+                const shouldClose =
+                    !cell.east || (cell.north && randInt(0, 1) === 0);
+                if (shouldClose) {
+                    const member = sample(run);
+                    if (member.north) {
+                        member.link(member.north);
+                    }
+                    run = [];
+                } else if (cell.east) {
+                    cell.link(cell.east);
+                }
+            });
+        }
+    }
+
+    public reset(): void {
+        this.populateGrid();
     }
 
     private populateGrid(): void {
@@ -111,7 +134,7 @@ export class Grid {
             const c = cell.col();
             cell.north = this.get(r - 1, c);
             cell.south = this.get(r + 1, c);
-            cell.east = this.get(r, c + 1)
+            cell.east = this.get(r, c + 1);
             cell.west = this.get(r, c - 1);
         }
     }
