@@ -1,4 +1,3 @@
-import { Logo } from "./logo";
 import { Grid } from "./mazes/grid";
 
 export function App() {
@@ -11,7 +10,6 @@ export function App() {
 
     return (
         <>
-            <Logo />
             <p>Hello Vite + Preact!</p>
             <p>
                 <a

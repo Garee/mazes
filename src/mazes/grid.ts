@@ -45,7 +45,7 @@ export class Grid {
     public rand(): Cell {
         const r = randInt(0, this.#rows - 1);
         const c = randInt(0, this.#cols - 1);
-        return this.get(r, c)!;
+        return this.get(r, c) as Cell;
     }
 
     public size(): number {
@@ -68,11 +68,11 @@ export class Grid {
 
     public toString() {
         let s = "+" + "---+".repeat(this.#cols) + "\n";
-        for (let row of this.eachRow()) {
+        for (const row of this.eachRow()) {
             let top = "|";
             let bottom = "+";
 
-            for (let cell of row) {
+            for (const cell of row) {
                 const east = cell.linked(cell.east) ? " " : "|";
                 const south = cell.linked(cell.south) ? "   " : "---";
                 top += "   " + east;
@@ -86,7 +86,7 @@ export class Grid {
     }
 
     public binaryTree(): void {
-        for (let cell of this.eachCell()) {
+        for (const cell of this.eachCell()) {
             const neighbours = [cell.north, cell.east].filter((n) => !!n);
             const neighbour = sample(neighbours);
             if (neighbour) {
@@ -129,7 +129,7 @@ export class Grid {
     }
 
     private assignNeighbours(): void {
-        for (let cell of this.eachCell()) {
+        for (const cell of this.eachCell()) {
             const r = cell.row();
             const c = cell.col();
             cell.north = this.get(r - 1, c);
