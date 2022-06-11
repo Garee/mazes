@@ -6,13 +6,23 @@ export interface CanvasProps {
     grid: Grid;
     width: number;
     height: number;
+    style?: {
+        lineWidth?: number;
+        lineColor?: string;
+    };
 }
 
 export const Canvas: FunctionComponent<CanvasProps> = ({
     grid,
     width,
     height,
+    style,
 }) => {
+    const lineStyle = {
+        width: style?.lineWidth ?? 10,
+        color: style?.lineColor ?? "#000",
+    };
+
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     function draw(ctx: CanvasRenderingContext2D) {
@@ -23,7 +33,7 @@ export const Canvas: FunctionComponent<CanvasProps> = ({
         ctx.fillStyle = "#fff";
         ctx.fill();
 
-        const lineWidth = 10;
+        const lineWidth = lineStyle.width;
         const offset = lineWidth / 2;
         const cellWidth = width / grid.cols - lineWidth;
         const cellHeight = height / grid.rows - lineWidth;
@@ -34,7 +44,7 @@ export const Canvas: FunctionComponent<CanvasProps> = ({
         let y = origY;
 
         ctx.lineWidth = lineWidth;
-        ctx.strokeStyle = "#000";
+        ctx.strokeStyle = lineStyle.color;
 
         ctx.beginPath();
         ctx.moveTo(x - offset, y);
