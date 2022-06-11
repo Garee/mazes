@@ -18,6 +18,14 @@ export class Grid {
         this.populateGrid();
     }
 
+    get rows(): number {
+        return this.#rows;
+    }
+
+    get cols(): number {
+        return this.#cols;
+    }
+
     public get(row: number, col: number): Cell | undefined {
         if (row < 0 || row > this.#rows - 1) {
             return undefined;
