@@ -2,7 +2,7 @@ import { Canvas } from "./components/canvas";
 import { Grid } from "./mazes/grid";
 
 export function App() {
-    const grid = new Grid(4, 4);
+    const grid = new Grid(20, 20);
     grid.binaryTree();
 
     return (

@@ -48,7 +48,7 @@ export const Canvas: FunctionComponent<CanvasProps> = ({
 
         ctx.beginPath();
         ctx.moveTo(x - offset, y);
-        ctx.lineTo(cellWidth * grid.cols + lineWidth + offset, y);
+        ctx.lineTo(cellWidth * grid.cols + offset * grid.cols, y);
         ctx.stroke();
 
         for (const row of grid.eachRow()) {
