@@ -104,4 +104,33 @@ export class Cell {
 
         return distances;
     }
+
+    public pathTo(goal: Cell): CellDistanceTracker {
+        const distances = this.distances();
+        const breadcrumbs = new CellDistanceTracker(this);
+
+        const goalDistance = distances.get(goal);
+        if (goalDistance) {
+            breadcrumbs.set(goal, goalDistance);
+        }
+
+        let current = goal;
+        while (current !== this) {
+            for (const link of current.links()) {
+                const currentDistance = distances.get(current);
+                const linkDistance = distances.get(link);
+                if (
+                    linkDistance !== undefined &&
+                    currentDistance !== undefined &&
+                    linkDistance < currentDistance
+                ) {
+                    breadcrumbs.set(link, currentDistance - 1);
+                    current = link;
+                    break;
+                }
+            }
+        }
+
+        return breadcrumbs;
+    }
 }

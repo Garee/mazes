@@ -11,6 +11,11 @@ export function App() {
         grid.distances = start.distances();
     }
 
+    const end = grid.get(grid.rows - 1, 0);
+    if (end) {
+        grid.distances = start?.pathTo(end);
+    }
+
     return (
         <>
             <Canvas grid={grid} width={500} height={500}></Canvas>
