@@ -9,12 +9,20 @@ export function App() {
     const start = grid.get(0, 0);
     if (start) {
         grid.distances = start.distances();
+        const [newStart] = grid.max();
+        if (newStart) {
+            grid.distances = newStart.distances();
+            const [goal] = grid.max();
+            if (goal) {
+                grid.distances = newStart.pathTo(goal);
+            }
+        }
     }
 
-    const end = grid.get(grid.rows - 1, 0);
+    /*const end = grid.get(grid.rows - 1, 0);
     if (end) {
         grid.distances = start?.pathTo(end);
-    }
+    }*/
 
     return (
         <>
