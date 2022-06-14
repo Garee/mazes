@@ -1,9 +1,15 @@
 import { Canvas } from "./components/canvas";
-import { Grid } from "./mazes/grid";
+import { DistanceGrid } from "./mazes/distance-grid";
 
 export function App() {
-    const grid = new Grid(20, 20);
+    //const grid = new Grid(5, 5);
+    const grid = new DistanceGrid(5, 5);
     grid.binaryTree();
+
+    const start = grid.get(0, 0);
+    if (start) {
+        grid.distances = start.distances();
+    }
 
     return (
         <>

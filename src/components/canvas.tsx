@@ -75,6 +75,14 @@ export const Canvas: FunctionComponent<CanvasProps> = ({
                     ctx.lineTo(x, y - cellHeight - offset);
                     ctx.stroke();
                 }
+
+                ctx.fillStyle = "black";
+                ctx.font = "30px Helvetica Neue";
+                ctx.fillText(
+                    grid.contentsOf(cell),
+                    x - cellWidth / 1.75,
+                    y - cellWidth / 2.5
+                );
             }
         }
     }

@@ -1,3 +1,5 @@
+import { CellDistanceTracker } from "./cell-distance-tracker";
+
 export class Cell {
     #row: number;
     #col: number;
@@ -75,5 +77,31 @@ export class Cell {
 
     public linked(cell?: Cell): boolean {
         return !!cell && this.#links.has(cell);
+    }
+
+    public distances(): CellDistanceTracker {
+        const distances = new CellDistanceTracker(this);
+
+        let frontier: Cell[] = [this];
+        while (frontier.length > 0) {
+            const nextFrontier: Cell[] = [];
+            for (const cell of frontier) {
+                const cellDistance = distances.get(cell);
+                for (const link of cell.links()) {
+                    const linkDistance = distances.get(link);
+                    if (
+                        linkDistance === undefined &&
+                        cellDistance !== undefined
+                    ) {
+                        distances.set(link, cellDistance + 1);
+                        nextFrontier.push(link);
+                    }
+                }
+            }
+
+            frontier = nextFrontier;
+        }
+
+        return distances;
     }
 }

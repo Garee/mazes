@@ -74,6 +74,10 @@ export class Grid {
         }
     }
 
+    public contentsOf(_cell: Cell): string {
+        return " ";
+    }
+
     public toString() {
         let s = "+" + "---+".repeat(this.#cols) + "\n";
         for (const row of this.eachRow()) {
@@ -83,7 +87,7 @@ export class Grid {
             for (const cell of row) {
                 const east = cell.linked(cell.east) ? " " : "|";
                 const south = cell.linked(cell.south) ? "   " : "---";
-                top += "   " + east;
+                top += ` ${this.contentsOf(cell)} ` + east;
                 bottom += south + "+";
             }
 
