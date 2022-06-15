@@ -81,8 +81,17 @@ export const Canvas: FunctionComponent<CanvasProps> = ({
                 ctx.fillText(
                     grid.contentsOf(cell),
                     x - cellWidth / 1.75,
-                    y - cellWidth / 2.5
+                    y - cellHeight / 2.5
                 );
+
+                ctx.fillStyle = grid.colorOf(cell);
+                ctx.fillRect(
+                    x - cellWidth + offset,
+                    y - cellHeight + offset,
+                    cellWidth - lineWidth,
+                    cellHeight - lineWidth
+                );
+                ctx.stroke();
             }
         }
     }

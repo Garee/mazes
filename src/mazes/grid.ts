@@ -78,6 +78,10 @@ export class Grid {
         return " ";
     }
 
+    public colorOf(_cell: Cell): string {
+        return "white";
+    }
+
     public toString() {
         let s = "+" + "---+".repeat(this.#cols) + "\n";
         for (const row of this.eachRow()) {
