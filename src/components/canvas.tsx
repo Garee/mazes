@@ -63,7 +63,12 @@ export const Canvas: FunctionComponent<CanvasProps> = ({
                 ctx.beginPath();
                 ctx.moveTo(x, y);
                 if (!cell.linked(cell.south)) {
+                    ctx.strokeStyle = "black";
                     ctx.lineTo(x + cellWidth + offset, y);
+                    ctx.stroke();
+                } else {
+                    ctx.strokeStyle = grid.colorOf(cell);
+                    ctx.lineTo(x + cellWidth, y);
                     ctx.stroke();
                 }
 
@@ -72,7 +77,12 @@ export const Canvas: FunctionComponent<CanvasProps> = ({
                 ctx.moveTo(x, y);
 
                 if (!cell.linked(cell.east)) {
+                    ctx.strokeStyle = "black";
                     ctx.lineTo(x, y - cellHeight - offset);
+                    ctx.stroke();
+                } else {
+                    ctx.strokeStyle = grid.colorOf(cell);
+                    ctx.lineTo(x, y - cellHeight + offset);
                     ctx.stroke();
                 }
 
