@@ -33,10 +33,10 @@ export const Canvas: FunctionComponent<CanvasProps> = ({
         ctx.fillStyle = "#fff";
         ctx.fill();
 
-        const lineWidth = lineStyle.width;
-        const offset = lineWidth / 2;
-        const cellWidth = width / grid.cols - lineWidth;
-        const cellHeight = height / grid.rows - lineWidth;
+        const lineWidth = Math.floor(lineStyle.width);
+        const offset = Math.floor(lineWidth / 2);
+        const cellWidth = Math.floor(width / grid.cols - lineWidth);
+        const cellHeight = Math.floor(height / grid.rows - lineWidth);
         const origX = (width - cellWidth * grid.cols) / 2;
         const origY = (height - cellHeight * grid.rows) / 2;
 
@@ -67,6 +67,7 @@ export const Canvas: FunctionComponent<CanvasProps> = ({
                     ctx.lineTo(x + cellWidth + offset, y);
                     ctx.stroke();
                 } else {
+                    ctx.moveTo(x + offset, y);
                     ctx.strokeStyle = grid.colorOf(cell);
                     ctx.lineTo(x + cellWidth, y);
                     ctx.stroke();
@@ -81,6 +82,7 @@ export const Canvas: FunctionComponent<CanvasProps> = ({
                     ctx.lineTo(x, y - cellHeight - offset);
                     ctx.stroke();
                 } else {
+                    ctx.moveTo(x, y - offset);
                     ctx.strokeStyle = grid.colorOf(cell);
                     ctx.lineTo(x, y - cellHeight + offset);
                     ctx.stroke();
