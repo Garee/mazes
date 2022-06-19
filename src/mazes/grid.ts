@@ -144,6 +144,36 @@ export class Grid {
         }
     }
 
+    public wilsons(): void {
+        const cells = [...this.eachCell()];
+        const first = sample(cells);
+        let unvisited = cells.filter((c) => c !== first);
+
+        let n = 0;
+        while (unvisited.length > 0) {
+            if (n++ > 1000) {
+                return;
+            }
+            let cell = sample(unvisited);
+            let path = [cell];
+
+            while (unvisited.includes(cell)) {
+                cell = sample(cell.neighbours());
+                const pos = path.indexOf(cell);
+                if (pos !== -1) {
+                    path = path.slice(0, pos + 1);
+                } else {
+                    path.push(cell);
+                }
+            }
+
+            for (let i = 0; i < path.length - 1; i++) {
+                path[i].link(path[i + 1]);
+                unvisited = unvisited.filter((c) => c !== path[i]);
+            }
+        }
+    }
+
     public reset(): void {
         this.populateGrid();
     }

@@ -5,7 +5,7 @@ export function App() {
     //const grid = new Grid(5, 5);
     const grid = new ColorGrid(20, 20);
     //grid.binaryTree();
-    grid.aldousBroder();
+    grid.wilsons();
 
     const start = grid.rand();
     if (start) {
