@@ -3,13 +3,11 @@ import { ColorGrid } from "./mazes/color-grid";
 
 export function App() {
     //const grid = new Grid(5, 5);
-    const grid = new ColorGrid(25, 25);
-    grid.binaryTree();
+    const grid = new ColorGrid(20, 20);
+    //grid.binaryTree();
+    grid.aldousBroder();
 
-    const start = grid.get(
-        Math.floor(grid.rows / 2),
-        Math.floor(grid.cols / 2)
-    );
+    const start = grid.rand();
     if (start) {
         grid.distances = start.distances();
         /*const [newStart] = grid.max();

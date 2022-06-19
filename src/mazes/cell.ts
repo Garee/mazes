@@ -55,6 +55,11 @@ export class Cell {
         this.#west = cell;
     }
 
+    public neighbours(): Cell[] {
+        const cells = [this.north, this.west, this.south, this.east];
+        return cells.filter((c) => c !== undefined) as Cell[];
+    }
+
     public links(): Cell[] {
         return [...this.#links.keys()];
     }

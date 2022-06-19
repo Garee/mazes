@@ -130,6 +130,20 @@ export class Grid {
         }
     }
 
+    public aldousBroder(): void {
+        let cell = this.rand();
+        let unvisited = this.size() - 1;
+        while (unvisited > 0) {
+            const neighbour = sample(cell.neighbours());
+            if (neighbour.links().length === 0) {
+                cell.link(neighbour);
+                unvisited--;
+            }
+
+            cell = neighbour;
+        }
+    }
+
     public reset(): void {
         this.populateGrid();
     }

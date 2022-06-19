@@ -69,7 +69,7 @@ export const Canvas: FunctionComponent<CanvasProps> = ({
                 } else {
                     ctx.moveTo(x + offset, y);
                     ctx.strokeStyle = grid.colorOf(cell);
-                    ctx.lineTo(x + cellWidth, y);
+                    ctx.lineTo(x + cellWidth + offset, y);
                     ctx.stroke();
                 }
 
